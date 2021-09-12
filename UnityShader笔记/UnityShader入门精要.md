@@ -812,17 +812,26 @@ Unity场景中的环境光控制：window->Lighting->Ambient Source/Ambient Colo
 
 漫反射计算公式
 
-1. 基本光照模型中漫反射部分的计算公式：![image-20210905210033026](C:\Users\12579\AppData\Roaming\Typora\typora-user-images\image-20210905210033026.png)
+1. 基本光照模型中漫反射部分的计算公式：![image-20210905210033026](UnityShader入门精要.assets/image-20210905210033026.png)
 2. 公式需要四个参数：入射光线的颜色和强度Clight，材质的漫反射系数Mdiffuse，表面法线n，光源方向I。
 3. max是防止点积结果为负值，CG提供了这样的函数 saturate(x)（用于将标量或矢量截取在[0,1]范围内）。
 
 Unity中实现漫反射
 
 1. 学习工程中：Chapter6,Scene_6_4,  Shader:DiffuseVertexLevel
+2. **_Diffuse.rgb 是一个数值吗，表示什么**，\_LightColor0.rgb*\_Diffuse.rgb是什么算式
 
 ### 6.5 在Unity Shader中实现高光反射光照模型
 
+高光发射公式
+
+1. 高光反射的计算公式：![image-20210911112413442](UnityShader入门精要.assets/image-20210911112413442.png)
+2. 需要四个参数：入射光线的颜色和强度Clight，材质的漫反射系数Mspecular，视角方向V以及反射方向r。反射方向r可以有表面法线n和光源方向I计算而得：CG提供了计算反射方向的函数，reflect(i,n)![image-20210911112604105](UnityShader入门精要.assets/image-20210911112604105.png)
+3. ![image-20210911112748226](UnityShader入门精要.assets/image-20210911112748226.png)
+
 ### 6.6 召唤神龙：使用Unity 内置的函数
+
+1. 上面计算中需要计算光源方向、视角方向这两个基本信息，而在复杂的光照模型下，那个计算方式是错误的。
 
 ## 第七章 基础纹理
 
